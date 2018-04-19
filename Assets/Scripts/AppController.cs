@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AppController : MonoBehaviour {
+
     #region UnityCompliant Singleton
     public static AppController Instance
     {
@@ -25,11 +26,14 @@ public class AppController : MonoBehaviour {
 
     [Header("Faction Switch")]
     [SerializeField]
-    Image fadescreen;
-    [SerializeField]
     Texture2D cursorOrc;
     [SerializeField]
     MusicController mainMusic;
+
+    [Space(10)]
+    [Header("Unit Selection")]
+    public Unit selectedUnit;
+    public Faction selectedFaction;
 
 
     public void SwitchToAlliance()
@@ -42,6 +46,11 @@ public class AppController : MonoBehaviour {
     {
         mainMusic.SwitchMusic(false);
         Cursor.SetCursor(cursorOrc, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void SelectUnit(string unitToSelect)
+    {
+        selectedUnit = Resources.Load("Units/" + selectedFaction.name + "/" + unitToSelect, typeof(Unit)) as Unit;
     }
 
     public void ExitApp()
